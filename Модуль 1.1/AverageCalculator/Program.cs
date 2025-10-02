@@ -6,39 +6,43 @@ namespace AverageCalculator
     {
         static void Main(string[] args)
         {
+            // Выводим приглашение для ввода трёх чисел
             Console.WriteLine("Введите три числа для вычисления среднего арифметического.");
 
-            // Запрашиваем первое число
+            // Запрашиваем первое число от пользователя
             Console.Write("Введите первое число: ");
-            string input1 = Console.ReadLine();
-            if (!double.TryParse(input1, out double number1))
+            string input1 = Console.ReadLine(); // Считываем введённую строку
+            // Проверяем, является ли ввод корректным числом
+            if (!double.TryParse(input1, out double number1)) // Преобразуем строку в число типа double
             {
-                Console.WriteLine("Ошибка: введите корректное число!");
-                return; // Завершаем программу при ошибке
+                Console.WriteLine("Ошибка: введите корректное число!"); // Сообщение об ошибке, если ввод некорректен
+                return; // Завершаем программу, если введено не число
             }
 
-            // Запрашиваем второе число
+            // Запрашиваем второе число от пользователя
             Console.Write("Введите второе число: ");
-            string input2 = Console.ReadLine();
-            if (!double.TryParse(input2, out double number2))
+            string input2 = Console.ReadLine(); // Считываем вторую строку
+            // Проверяем корректность второго ввода
+            if (!double.TryParse(input2, out double number2)) // Преобразуем строку в число
             {
-                Console.WriteLine("Ошибка: введите корректное число!");
-                return;
+                Console.WriteLine("Ошибка: введите корректное число!"); // Сообщение об ошибке
+                return; // Завершаем программу при некорректном вводе
             }
 
-            // Запрашиваем третье число
+            // Запрашиваем третье число от пользователя
             Console.Write("Введите третье число: ");
-            string input3 = Console.ReadLine();
-            if (!double.TryParse(input3, out double number3))
+            string input3 = Console.ReadLine(); // Считываем третью строку
+            // Проверяем корректность третьего ввода
+            if (!double.TryParse(input3, out double number3)) // Преобразуем строку в число
             {
-                Console.WriteLine("Ошибка: введите корректное число!");
-                return;
+                Console.WriteLine("Ошибка: введите корректное число!"); // Сообщение об ошибке
+                return; // Завершаем программу при некорректном вводе
             }
 
-            // Вычисляем среднее арифметическое
+            // Вычисляем среднее арифметическое: сумма трёх чисел, делённая на 3
             double average = (number1 + number2 + number3) / 3;
 
-            // Выводим результат
+            // Выводим результат, форматируя число до двух знаков после запятой
             Console.WriteLine($"Среднее арифметическое чисел {number1}, {number2}, {number3} равно {average:F2}");
         }
     }

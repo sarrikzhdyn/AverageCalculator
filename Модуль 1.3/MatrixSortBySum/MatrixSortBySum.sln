@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36511.14 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MatrixSortBySum", "MatrixSortBySum.csproj", "{777DAB6C-0709-46BA-AC43-E307E98558CE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{777DAB6C-0709-46BA-AC43-E307E98558CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{777DAB6C-0709-46BA-AC43-E307E98558CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{777DAB6C-0709-46BA-AC43-E307E98558CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{777DAB6C-0709-46BA-AC43-E307E98558CE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {41173C2C-1CE6-40F8-8816-1EEE134099F2}
+	EndGlobalSection
+EndGlobal
