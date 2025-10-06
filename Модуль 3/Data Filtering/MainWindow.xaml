@@ -1,0 +1,224 @@
+﻿<Window x:Class="Задание_4.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Задание_4"
+        mc:Ignorable="d"
+        Title="Data Filtering App" 
+        MinHeight="350" MinWidth="300" 
+        Height="680" Width="600"
+        WindowStartupLocation="CenterScreen">
+    <Window.Background>
+        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+            <GradientStop Color="#60A5FA" Offset="0"/>
+            <!-- Яркий голубой -->
+            <GradientStop Color="#F3F4F6" Offset="1"/>
+            <!-- Светло-серый -->
+        </LinearGradientBrush>
+    </Window.Background>
+    <Window.Resources>
+        <!-- Стиль для кнопки -->
+        <Style x:Key="ModernButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="#3B82F6"/>
+            <Setter Property="Foreground" Value="#FFFFFF"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="FontFamily" Value="Segoe UI"/>
+            <Setter Property="Padding" Value="10,6"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="MinWidth" Value="150"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="Border" Background="{TemplateBinding Background}" 
+                                CornerRadius="6" BorderThickness="0">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Border" Property="Background" Value="#2563EB"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="Border" Property="Background" Value="#1D4ED8"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <!-- Стиль для TextBlock -->
+        <Style x:Key="ModernTextBlockStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="FontFamily" Value="Segoe UI"/>
+            <Setter Property="Foreground" Value="#111827"/>
+            <Setter Property="Margin" Value="0,0,0,5"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+        </Style>
+        <!-- Стиль для TextBox -->
+        <Style x:Key="ModernTextBoxStyle" TargetType="TextBox">
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="FontFamily" Value="Segoe UI"/>
+            <Setter Property="Foreground" Value="#111827"/>
+            <Setter Property="Background" Value="#FFFFFF"/>
+            <Setter Property="BorderBrush" Value="#D1D5DB"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Padding" Value="8"/>
+            <Setter Property="Margin" Value="0,0,0,5"/>
+            <Setter Property="Height" Value="32"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TextBox">
+                        <Border x:Name="Border" Background="{TemplateBinding Background}" 
+                                BorderBrush="{TemplateBinding BorderBrush}" 
+                                BorderThickness="{TemplateBinding BorderThickness}" 
+                                CornerRadius="6">
+                            <ScrollViewer x:Name="PART_ContentHost" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsFocused" Value="True">
+                                <Setter TargetName="Border" Property="BorderBrush" Value="#2563EB"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <!-- Стиль для ComboBox -->
+        <Style x:Key="ModernComboBoxStyle" TargetType="ComboBox">
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="FontFamily" Value="Segoe UI"/>
+            <Setter Property="Foreground" Value="#111827"/>
+            <Setter Property="Background" Value="#FFFFFF"/>
+            <Setter Property="BorderBrush" Value="#D1D5DB"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Padding" Value="8"/>
+            <Setter Property="Margin" Value="0,0,0,5"/>
+            <Setter Property="Height" Value="32"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ComboBox">
+                        <Border x:Name="Border" Background="{TemplateBinding Background}" 
+                                BorderBrush="{TemplateBinding BorderBrush}" 
+                                BorderThickness="{TemplateBinding BorderThickness}" 
+                                CornerRadius="6">
+                            <Grid>
+                                <ToggleButton x:Name="ToggleButton" IsChecked="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
+                                              Background="{TemplateBinding Background}" BorderThickness="0"/>
+                                <ContentPresenter x:Name="ContentSite" IsHitTestVisible="False" 
+                                                  Content="{TemplateBinding SelectionBoxItem}"
+                                                  ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}"
+                                                  HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="{TemplateBinding Padding}"/>
+                                <Popup x:Name="Popup" IsOpen="{TemplateBinding IsDropDownOpen}" Placement="Bottom" 
+                                       AllowsTransparency="True" Focusable="False" PopupAnimation="Slide">
+                                    <Border x:Name="DropDownBorder" Background="#FFFFFF" BorderBrush="#D1D5DB" 
+                                            BorderThickness="1" CornerRadius="6" MaxHeight="150">
+                                        <ScrollViewer>
+                                            <ItemsPresenter/>
+                                        </ScrollViewer>
+                                    </Border>
+                                </Popup>
+                            </Grid>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsFocused" Value="True">
+                                <Setter TargetName="Border" Property="BorderBrush" Value="#2563EB"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Border" Property="BorderBrush" Value="#2563EB"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <!-- Стиль для ListBox -->
+        <Style x:Key="ModernListBoxStyle" TargetType="ListBox">
+            <Setter Property="Background" Value="#FFFFFF"/>
+            <Setter Property="BorderBrush" Value="#D1D5DB"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="FontFamily" Value="Segoe UI"/>
+            <Setter Property="Foreground" Value="#111827"/>
+            <Setter Property="Padding" Value="8"/>
+            <Setter Property="Margin" Value="0,0,0,5"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ListBox">
+                        <Border Background="{TemplateBinding Background}" 
+                                BorderBrush="{TemplateBinding BorderBrush}" 
+                                BorderThickness="{TemplateBinding BorderThickness}" 
+                                CornerRadius="6">
+                            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                                <ItemsPresenter/>
+                            </ScrollViewer>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    <ScrollViewer VerticalScrollBarVisibility="Auto" Margin="0,0,0,-5">
+        <Grid Margin="10" Height="745">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <!-- Заголовок -->
+                <RowDefinition Height="Auto"/>
+                <!-- Исходные данные -->
+                <RowDefinition Height="Auto"/>
+                <!-- Фильтры -->
+                <RowDefinition Height="Auto"/>
+                <!-- Кнопка -->
+                <RowDefinition Height="*"/>
+                <!-- Отфильтрованные данные -->
+            </Grid.RowDefinitions>
+
+            <!-- Заголовок -->
+            <Border Grid.Row="0" Background="#FFFFFF" CornerRadius="8" Padding="10" Margin="0,0,0,5">
+                <TextBlock Text="Фильтрация данных" FontSize="16" FontWeight="Bold" 
+                           FontFamily="Segoe UI" Foreground="#111827" 
+                           HorizontalAlignment="Center"/>
+            </Border>
+
+            <!-- Исходные данные -->
+            <Border Grid.Row="1" Background="#FFFFFF" CornerRadius="8" Padding="10" Margin="0,0,0,5">
+                <StackPanel>
+                    <TextBlock Text="Данные для фильтрации:" Style="{StaticResource ModernTextBlockStyle}"/>
+                    <ListBox x:Name="DataListBox" Height="150" Style="{StaticResource ModernListBoxStyle}" 
+                             ToolTip="Список исходных данных"/>
+                </StackPanel>
+            </Border>
+
+            <!-- Фильтры -->
+            <Border Grid.Row="2" Background="#FFFFFF" CornerRadius="8" Padding="10" Margin="0,0,0,5">
+                <StackPanel>
+                    <TextBlock Text="Выберите фильтр:" Style="{StaticResource ModernTextBlockStyle}"/>
+                    <ComboBox x:Name="FilterSelector" Style="{StaticResource ModernComboBoxStyle}"
+                              ToolTip="Выберите тип фильтра">
+                        <ComboBoxItem Content="Фильтр по дате (после)"/>
+                        <ComboBoxItem Content="Фильтр по ключевому слову"/>
+                    </ComboBox>
+                    <TextBlock Text="Введите значение фильтра:" Style="{StaticResource ModernTextBlockStyle}"/>
+                    <TextBox x:Name="FilterValueTextBox" Style="{StaticResource ModernTextBoxStyle}"
+                             ToolTip="Введите значение для фильтра (дата или слово)"/>
+                </StackPanel>
+            </Border>
+
+            <!-- Кнопка -->
+            <Button Grid.Row="4" Content="Применить фильтр" Click="ApplyFilterButton_Click" 
+                    Style="{StaticResource ModernButtonStyle}" ToolTip="Применить выбранный фильтр" Margin="187,10,187,321"/>
+
+            <!-- Отфильтрованные данные -->
+            <Border Grid.Row="4" Background="#FFFFFF" CornerRadius="8" Padding="10" Margin="0,44,0,116">
+                <StackPanel>
+                    <TextBlock Text="Отфильтрованные данные:" Style="{StaticResource ModernTextBlockStyle}"/>
+                    <ListBox x:Name="FilteredDataListBox" Height="150" Style="{StaticResource ModernListBoxStyle}"
+                             ToolTip="Список отфильтрованных данных"/>
+                </StackPanel>
+            </Border>
+        </Grid>
+    </ScrollViewer>
+</Window>

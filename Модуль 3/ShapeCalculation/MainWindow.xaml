@@ -1,0 +1,120 @@
+﻿<Window x:Class="ShapeWPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Вычисление площади фигур" MinHeight="400" MinWidth="600">
+    <Window.Background>
+        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+            <GradientStop Color="#F5F7FA" Offset="0"/>
+            <!-- Очень мягкий светло-серый -->
+            <GradientStop Color="#E0E8F0" Offset="1"/>
+            <!-- Лёгкий переход к серо-голубому -->
+        </LinearGradientBrush>
+    </Window.Background>
+    <Grid Margin="20,26,-20,0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Кнопки с закруглёнными углами, выровнены по центру -->
+        <StackPanel Orientation="Horizontal" Grid.Row="0" HorizontalAlignment="Center" Margin="10" Grid.ColumnSpan="3">
+            <Button x:Name="CreateCircleButton" Content="Создать круг" Click="CreateCircleButton_Click" Margin="5" Padding="10,5" Width="150">
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="#4DD0E1" CornerRadius="10" Padding="5">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Foreground" Value="White"/>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#26A69A"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+            <Button x:Name="CreateRectangleButton" Content="Создать прямоугольник" Click="CreateRectangleButton_Click" Margin="5" Padding="10,5" Width="150">
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="#4DD0E1" CornerRadius="10" Padding="5">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Foreground" Value="White"/>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#26A69A"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Center" Margin="10" Grid.ColumnSpan="3">
+            <Button x:Name="CreateTriangleButton" Content="Создать треугольник" Click="CreateTriangleButton_Click" Margin="5" Padding="10,5" Width="150">
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="#4DD0E1" CornerRadius="10" Padding="5">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Foreground" Value="White"/>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#26A69A"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+            <Button x:Name="CalculateAreaButton" Content="Вычислить площадь" Click="CalculateAreaButton_Click" Margin="5" Padding="10,5" Width="150">
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="#4DD0E1" CornerRadius="10" Padding="5">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Foreground" Value="White"/>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#26A69A"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+        </StackPanel>
+
+        <!-- Поле для вывода результата, выровнено по центру -->
+        <TextBlock x:Name="ResultTextBlock" Grid.Row="3" HorizontalAlignment="Center" Margin="10" Text="Результат появится здесь" FontSize="16" Grid.ColumnSpan="3" TextWrapping="Wrap" Width="400" TextAlignment="Center"/>
+
+        <!-- Поле для ввода данных, выровнено по центру -->
+        <StackPanel Grid.Row="4" HorizontalAlignment="Center" Margin="10" Grid.ColumnSpan="3">
+            <TextBox x:Name="InputTextBox" Height="30" Width="400" Margin="0,0,0,5"/>
+            <TextBlock x:Name="InstructionTextBlock" Text="Введите радиус, ширину и высоту, или стороны треугольника через пробел" Margin="0,0,0,5"/>
+        </StackPanel>
+    </Grid>
+</Window>
