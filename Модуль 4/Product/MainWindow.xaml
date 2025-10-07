@@ -1,0 +1,133 @@
+﻿<Window x:Class="ShapeWPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Учёт продуктов в магазине" MinHeight="500" MinWidth="700"
+        WindowStartupLocation="CenterScreen" WindowStyle="SingleBorderWindow">
+    <Window.Background>
+        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+            <GradientStop Color="#F5F7FA" Offset="0"/>
+            <!-- Светло-серый -->
+            <GradientStop Color="#E0E7F0" Offset="1"/>
+            <!-- Ещё более светлый -->
+        </LinearGradientBrush>
+    </Window.Background>
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Заголовок -->
+        <TextBlock Grid.Row="0" Text="Учёт продуктов" FontSize="28" FontWeight="Bold" Foreground="#2C3E50" 
+                   HorizontalAlignment="Center" Margin="0,0,0,20"/>
+
+        <!-- Выбор типа товара -->
+        <Border Grid.Row="1" Background="#FFFFFF" CornerRadius="10" Padding="15" Margin="0,0,0,20" 
+                BorderBrush="#ECF0F1" BorderThickness="1">
+            <ComboBox x:Name="ProductTypeComboBox" Width="600" Height="40" FontSize="16" 
+                      SelectionChanged="ProductTypeComboBox_SelectionChanged">
+                <ComboBoxItem Content="Продукты питания"/>
+                <ComboBoxItem Content="Электроника"/>
+                <ComboBoxItem Content="Одежда"/>
+            </ComboBox>
+        </Border>
+
+        <!-- Поля ввода -->
+        <Border Grid.Row="2" Background="#FFFFFF" CornerRadius="10" Padding="15" Margin="0,0,0,20" 
+                BorderBrush="#ECF0F1" BorderThickness="1">
+            <StackPanel x:Name="InputPanel" Margin="0,10">
+                <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                    <TextBlock Text="Название: " FontSize="16" VerticalAlignment="Center" Width="100"/>
+                    <TextBox x:Name="NameTextBox" Width="480" Height="40" FontSize="16" Margin="10,0,0,0"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                    <TextBlock Text="Цена: " FontSize="16" VerticalAlignment="Center" Width="100"/>
+                    <TextBox x:Name="PriceTextBox" Width="480" Height="40" FontSize="16" Margin="10,0,0,0"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                    <TextBlock Text="Остаток: " FontSize="16" VerticalAlignment="Center" Width="100"/>
+                    <TextBox x:Name="QuantityTextBox" Width="480" Height="40" FontSize="16" Margin="10,0,0,0"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                    <TextBlock Text="Доп. данные: " FontSize="16" VerticalAlignment="Center" Width="100"/>
+                    <TextBox x:Name="ExtraTextBox" Width="480" Height="40" FontSize="16" Margin="10,0,0,0"/>
+                </StackPanel>
+            </StackPanel>
+        </Border>
+
+        <!-- Кнопки и результат -->
+        <Grid Grid.Row="3">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <!-- Кнопки -->
+            <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,20">
+                <Button x:Name="CreateProductButton" Content="Создать товар" Click="CreateProductButton_Click" 
+                        Margin="5" Padding="20,10" Width="250" Height="50" FontSize="16">
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border x:Name="Border" Background="#3498DB" CornerRadius="8" Padding="5">
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="Border" Property="Background" Value="#2980B9"/>
+                                </Trigger>
+                                <Trigger Property="IsPressed" Value="True">
+                                    <Setter TargetName="Border" Property="Background" Value="#2471A3"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Button.Template>
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Foreground" Value="White"/>
+                        </Style>
+                    </Button.Style>
+                </Button>
+                <Button x:Name="UpdateStockButton" Content="Обновить остаток" Click="UpdateStockButton_Click" 
+                        Margin="5" Padding="20,10" Width="250" Height="50" FontSize="16">
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border x:Name="Border" Background="#3498DB" CornerRadius="8" Padding="5">
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="Border" Property="Background" Value="#2980B9"/>
+                                </Trigger>
+                                <Trigger Property="IsPressed" Value="True">
+                                    <Setter TargetName="Border" Property="Background" Value="#2471A3"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Button.Template>
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Foreground" Value="White"/>
+                        </Style>
+                    </Button.Style>
+                </Button>
+            </StackPanel>
+
+            <!-- Поле для вывода результата -->
+            <Border Grid.Row="1" Background="#FFFFFF" CornerRadius="10" Padding="15" 
+                    BorderBrush="#ECF0F1" BorderThickness="1">
+                <TextBlock x:Name="ResultTextBlock" HorizontalAlignment="Center" Text="Результат появится здесь" 
+                           FontSize="16" TextWrapping="Wrap" Width="600" TextAlignment="Center" Foreground="#2C3E50"/>
+            </Border>
+
+            <!-- Пояснительный текст -->
+            <Border Grid.Row="2" Background="#FFFFFF" CornerRadius="10" Padding="15" Margin="0,20,0,0" 
+                    BorderBrush="#ECF0F1" BorderThickness="1">
+                <TextBlock x:Name="InstructionTextBlock" Text="Выберите тип товара и заполните поля" 
+                           Foreground="#2C3E50" FontSize="16" TextAlignment="Center"/>
+            </Border>
+        </Grid>
+    </Grid>
+</Window>
