@@ -1,0 +1,53 @@
+﻿<Window x:Class="FinanceTracker.RecordEditDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FinanceTracker"
+        mc:Ignorable="d"
+        Title="RecordEditDialog" Height="450" Width="800">
+    <Grid Margin="15">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <TextBlock Grid.Row="0" Grid.Column="0" Text="Тип:" Margin="0,0,10,10"/>
+        <ComboBox Grid.Row="0" Grid.Column="1" x:Name="cmbType" 
+                  SelectedValuePath="Content" Margin="0,0,0,10">
+            <ComboBoxItem Content="Income" Tag="Доход"/>
+            <ComboBoxItem Content="Expense" Tag="Расход"/>
+        </ComboBox>
+
+        <TextBlock Grid.Row="1" Grid.Column="0" Text="Описание:" Margin="0,0,10,10"/>
+        <TextBox Grid.Row="1" Grid.Column="1" x:Name="txtDescription" Margin="0,0,0,10"/>
+
+        <TextBlock Grid.Row="2" Grid.Column="0" Text="Сумма:" Margin="0,0,10,10"/>
+        <TextBox Grid.Row="2" Grid.Column="1" x:Name="txtAmount" Margin="0,0,0,10"/>
+
+        <TextBlock Grid.Row="3" Grid.Column="0" Text="Категория:" Margin="0,0,10,10"/>
+        <TextBox Grid.Row="3" Grid.Column="1" x:Name="txtCategory" Margin="0,0,0,10"/>
+
+        <TextBlock Grid.Row="4" Grid.Column="0" Text="Дата:" Margin="0,0,10,10"/>
+        <DatePicker Grid.Row="4" Grid.Column="1" x:Name="dpDate" Margin="0,0,0,10"/>
+
+        <StackPanel Grid.Row="7" Grid.ColumnSpan="2" Orientation="Horizontal" 
+                    HorizontalAlignment="Right">
+            <Button x:Name="btnOk" Content="OK" Click="BtnOk_Click" 
+                    Padding="15,5" Margin="0,0,10,0" IsDefault="True"/>
+            <Button x:Name="btnCancel" Content="Отмена" Click="BtnCancel_Click" 
+                    Padding="15,5" IsCancel="True"/>
+        </StackPanel>
+    </Grid>
+</Window>
