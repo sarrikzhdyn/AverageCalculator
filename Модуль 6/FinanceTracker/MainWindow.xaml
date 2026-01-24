@@ -1,0 +1,74 @@
+﻿<Window x:Class="FinanceTracker.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:converters="clr-namespace:FinanceTracker.Converters"
+        Title="Учет финансов" Height="600" Width="900">
+    
+    <Window.Resources>
+        <converters:RecordTypeToColorConverter x:Key="RecordTypeToColorConverter"/>
+    </Window.Resources>
+
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Заголовок -->
+        <TextBlock Grid.Row="0" Grid.ColumnSpan="2" Text="Учет финансов" 
+                   FontSize="20" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,0,0,20"/>
+
+        <!-- Панель управления -->
+        <StackPanel Grid.Row="1" Grid.ColumnSpan="2" Orientation="Horizontal" Margin="0,0,0,10">
+            <Button x:Name="btnAdd" Content="Добавить запись" Click="BtnAdd_Click" 
+                    Padding="10,5" Margin="0,0,10,0"/>
+            <Button x:Name="btnEdit" Content="Редактировать" Click="BtnEdit_Click" 
+                    Padding="10,5" Margin="0,0,10,0" IsEnabled="False"/>
+            <Button x:Name="btnDelete" Content="Удалить" Click="BtnDelete_Click" 
+                    Padding="10,5" Margin="0,0,10,0" IsEnabled="False"/>
+            <Button x:Name="btnRefresh" Content="Обновить" Click="BtnRefresh_Click" 
+                    Padding="10,5"/>
+        </StackPanel>
+
+        <!-- Список записей -->
+        <DataGrid x:Name="dgRecords" Grid.Row="2" Grid.ColumnSpan="2" 
+                  AutoGenerateColumns="False" IsReadOnly="True" 
+                  SelectionMode="Single" SelectionChanged="DgRecords_SelectionChanged">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Дата" Binding="{Binding Date, StringFormat=dd.MM.yyyy}" Width="100"/>
+                <DataGridTextColumn Header="Описание" Binding="{Binding Description}" Width="200"/>
+                <DataGridTextColumn Header="Категория" Binding="{Binding Category}" Width="120"/>
+                <DataGridTextColumn Header="Тип" Binding="{Binding Type}" Width="80"/>
+                <DataGridTextColumn Header="Сумма" Binding="{Binding Amount, StringFormat={}{0:N2}}" Width="100">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="Foreground">
+                                <Setter.Value>
+                                    <Binding Path="Type" Converter="{StaticResource RecordTypeToColorConverter}"/>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <!-- Статистика -->
+        <StackPanel Grid.Row="3" Grid.Column="0" Orientation="Horizontal" Margin="0,10,0,0">
+            <TextBlock x:Name="txtTotalIncome" FontWeight="Bold" Foreground="Green" Margin="0,0,20,0"/>
+            <TextBlock x:Name="txtTotalExpense" FontWeight="Bold" Foreground="Red" Margin="0,0,20,0"/>
+            <TextBlock x:Name="txtBalance" FontWeight="Bold"/>
+        </StackPanel>
+
+        <!-- Кнопка настроек -->
+        <Button Grid.Row="3" Grid.Column="1" Content="Настройки Firebase" 
+                Click="BtnSettings_Click" Padding="10,5" HorizontalAlignment="Right"/>
+    </Grid>
+</Window>
